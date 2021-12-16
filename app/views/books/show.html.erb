@@ -23,6 +23,19 @@
           <% end %>
         </tr>
       </table>
+    <% if @book.favorited_by?(current_user) %>
+      <p>
+        <%= link_to book_favorites_path(@book), method: :delete do %>
+          ♥<%= @book.favorites.count %> いいね
+        <% end %>
+      </p>
+    <% else %>
+      <p>
+        <%= link_to book_favorites_path(@book), method: :post do %>
+          ♡<%= @book.favorites.count %> いいね
+        <% end %>
+      </p>
+    <% end %>
     </div>
   </div>
 </div>
