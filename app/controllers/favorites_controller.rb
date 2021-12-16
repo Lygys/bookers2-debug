@@ -8,12 +8,10 @@ class FavoritesController < ApplicationController
   def create
     favorite = current_user.favorites.new(book_id: @book.id)
     favorite.save
-    redirect_to book_path(@book)
   end
 
   def destroy
-    faborite = current_user.favorites.find_by(book_id: @book.id)
-    faborite.destroy
-    redirect_to book_path(@book)
+    favorite = current_user.favorites.find_by(book_id: @book.id)
+    favorite.destroy
   end
 end
