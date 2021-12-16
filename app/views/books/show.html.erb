@@ -17,10 +17,12 @@
           </td>
           <td><%= link_to @book.title, book_path(@book) %></td>
           <td><%= @book.body %></td>
+
           <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
             <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
           <% end %>
+
           <% if @book.favorited_by?(current_user) %>
             <td>
               <%= link_to book_favorites_path(@book), method: :delete do %>
@@ -34,8 +36,40 @@
               <% end %>
             </td>
           <% end %>
+            <td><p>コメント件数:<%= @comments.count %></p></td>
         </tr>
       </table>
+      <table>
+        <% @comments.each do |comment| %>
+          <tbody>
+            <tr>
+              <td>
+                <%= attachment_image_tag(comment.user, :profile_image, :fill, 100, 100, fallback: "no-image-icon.jpg") %>
+                <br><%= comment.user.name %>
+              </td>
+              <td><%= comment.comment %></td>
+              <% if comment.user == current_user %>
+                <td>
+                  <%= link_to 'Destroy', book_book_comment_path(comment, @book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+                </td>
+              <% end %>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+      <div>
+        <%= form_with(model:[@book, @ncomment], local: true) do |f| %>
+          <%= render 'layouts/errors', obj: @ncomment %>
+          <div class="form-group">
+            <%= f.text_area :comment, rows:'5', class: 'form-control', placeholder: "Comment Here" %>
+          </div>
+          <div class="form-group">
+            <%= f.submit "送信", class: 'btn btn-success' %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
+
+
