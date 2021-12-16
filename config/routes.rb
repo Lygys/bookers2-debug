@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users,only: [:show,:index,:edit,:update]
   resources :books do
     resource :favorites, only: [:create, :destroy]
+    resources :commentsm only: [:create, :destroy]
 
   end
 
