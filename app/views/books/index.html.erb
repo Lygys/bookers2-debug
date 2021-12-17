@@ -4,11 +4,11 @@
       <h2>User info</h2>
       <%= render 'users/info', user: current_user %>
       <h2 class="mt-3">New book</h2>
-      <%= render 'form', book: @nbook %>
+      <%= render 'books/form', book: @nbook %>
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
-      <%= render 'index', books: @books %>
+      <%= render 'books/index', books: @books %>
     </div>
   </div>
 </div>

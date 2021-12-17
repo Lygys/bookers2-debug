@@ -1,15 +1,26 @@
 class BookCommentsController < ApplicationController
+  before_action :set_book
+  def  set_book
+    @book = Book.find(params[:book_id])
+  end
+
 
   def create
-    @book = Book.find(params[:book_id])
+
     @ncomment = current_user.book_comments.new(book_comment_params)
     @ncomment.book_id = @book.id
-    @ncomment.save
-    redirect_to request.referer
+    if @ncomment.save
+      redirect_to book_path(@book)
+    else
+      @nbook = Book.new
+      @book = Book.find(params[:book_id])
+      @comments = BookComment.where(book_id: @book.id)
+      render 'books/show'
+    end
   end
 
   def destroy
-    BookComment.find_by(id: params[:book_comment_id]).destroy
+    BookComment.find_by(params[:book_comment_id]).destroy
     redirect_to request.referer
   end
 
