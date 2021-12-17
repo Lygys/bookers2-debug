@@ -1,12 +1,13 @@
 class BookCommentsController < ApplicationController
+
   before_action :set_book
+
   def  set_book
     @book = Book.find(params[:book_id])
   end
 
 
   def create
-
     @ncomment = current_user.book_comments.new(book_comment_params)
     @ncomment.book_id = @book.id
     if @ncomment.save
@@ -20,8 +21,13 @@ class BookCommentsController < ApplicationController
   end
 
   def destroy
-    BookComment.find_by(params[:book_comment_id]).destroy
-    redirect_to request.referer
+    comment = BookComment.find(params[:id])
+    if comment.user_id = current_user.id
+      comment.destroy
+      redirect_to request.referer
+    else
+      redirect_to root_path
+    end
   end
 
   private
