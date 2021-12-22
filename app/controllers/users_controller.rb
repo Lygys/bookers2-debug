@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
-
   before_action :ensure_correct_user, only: [:edit, :update]
+	before_action :set_nbook
+
+
+  def set_nbook
+    @nbook = Book.new
+  end
+
 
   def ensure_correct_user
     @user = User.find(params[:id])
@@ -12,6 +18,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @books = Book.where(user_id: @user)
+    @relationship = current_user.relationships.find_by(follow_id: @user.id)
+    @new_relationship = current_user.relationships.new
   end
 
   def index

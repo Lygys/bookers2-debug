@@ -1,5 +1,11 @@
 class BooksController < ApplicationController
 
+  before_action :set_nbook
+
+  def set_nbook
+    @nbook = Book.new
+  end
+
   def show
     @book = Book.find(params[:id])
     @comments = BookComment.where(book_id: @book.id)
