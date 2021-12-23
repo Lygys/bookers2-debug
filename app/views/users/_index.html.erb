@@ -11,6 +11,11 @@
       <tr>
         <td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
         <td><%= user.name %></td>
+        <td>Following:<%= user.followings.count %></td>
+        <td>Followers:<%= user.followers.count %></td>
+        <% unless current_user == user %>
+          <td><%= render 'relationships/follow_form', user: user %></td>
+        <% end %>
         <td><%= link_to 'Show', user_path(user), class: "user_#{user.id}" %></td>
       </tr>
     <% end %>

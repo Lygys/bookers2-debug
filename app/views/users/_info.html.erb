@@ -8,6 +8,14 @@
 	  <th>introduction</th>
 	  <th><%= user.introduction %></th>
   </tr>
+  <tr>
+    <th>following</th>
+    <th><%= user.followings.count %></th>
+  </tr>
+  <tr>
+    <th>followers</th>
+    <th><%= user.followers.count %></th>
+  </tr>
 </table>
 
 <div class='row'>
@@ -16,6 +24,8 @@
 
 <div>
   <% unless current_user == user %>
-    <%= render 'relationships/follow_form', user: user %>
+    <div class="form-group">
+      <%= render 'relationships/follow_form', user: user %>
+    </div>
   <% end %>
 </div>
