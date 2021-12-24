@@ -1,10 +1,10 @@
 <% if current_user.following?(user) %>
-  <%= form_with model: @relationship, url: relationship_path, method: :delete, local: true do |f| %>
+  <%= form_with model: @relationship, url: relationship_path(user), method: :delete, local: true do |f| %>
     <%= f.hidden_field :follow_id, value: user.id %>
     <%= f.submit 'Remove', class: 'btn btn-danger btn-block' %>
   <% end %>
 <% else %>
-  <%= form_with model: @new_relationship, url: relationships_path, local: true do |f| %>
+  <%= form_with model: @new_relationship, url: relationships_path(user), local: true do |f| %>
     <%= f.hidden_field :follow_id, value: user.id %>
     <%= f.submit 'Follow', class: 'btn btn-primary btn-block' %>
   <% end %>
