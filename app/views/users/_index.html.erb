@@ -14,7 +14,19 @@
         <td>Following:<%= user.followings.count %></td>
         <td>Followers:<%= user.followers.count %></td>
         <% unless current_user == user %>
-          <td><%= render 'relationships/follow_form', user: user %></td>
+          <% if current_user.following?(user) %>
+            <td>
+              <%= link_to relationship_path(user), method: :delete, local: true do |f| %>
+                <div class='btn btn-danger btn-block'>Remove</div>
+              <% end %>
+            </td>
+          <% else %>
+            <td>
+            <%= link_to relationships_path(user), method: :post, local: true do |f| %>
+              <div class='btn btn-primary btn-block'>Follow</div>
+            <% end %>
+            </td>
+          <% end %>
         <% end %>
         <td><%= link_to 'Show', user_path(user), class: "user_#{user.id}" %></td>
       </tr>

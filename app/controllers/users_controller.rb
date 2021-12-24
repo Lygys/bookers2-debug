@@ -25,8 +25,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @relationship = current_user.relationships.find_by(follow_id: user.id)
-    @new_relationship = current_user.relationships.new
   end
 
   def edit
