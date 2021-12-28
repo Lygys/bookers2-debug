@@ -5,10 +5,9 @@ class SearchsController < ApplicationController
     @content = params[:content]
     @method = params[:method]
     @results = search_for(@model, @content, @method)
-    if @model = "User"
+    if @model == "User"
       @relationship = current_user.relationships.find_by(follow_id: @results.ids)
       @new_relationship = current_user.relationships.new
-
     end
   end
 
@@ -39,6 +38,8 @@ class SearchsController < ApplicationController
       elsif @method == "backward"
         Book.where('title LIKE ?', '%'+content)
       end
+    else
+      redirect_to request.referer
     end
   end
 end

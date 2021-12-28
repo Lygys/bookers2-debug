@@ -15,10 +15,6 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
-  private
-  def search_params
-    params.fetch(:q, {}).permit(:content, :model, :method)
-  end
 
   protected
   def configure_permitted_parameters
