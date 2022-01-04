@@ -1,0 +1,3 @@
+<%= link_to book_favorites_path(book), method: :delete, remote: true do %>
+  <span class= "on-fav">♥<%= book.favorites.count %></span>
+<% end %>
