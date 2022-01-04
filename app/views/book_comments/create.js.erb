@@ -1,2 +1,2 @@
-$(".commentsArea").html("<%= j(render 'comments/comment-list', { comments: @comment.post.comments }) %>")；
-$(".inputComment").val('');
+$(".InputComment").val('');
+$("#Comment-List").html("<%= j(render 'book_comments/comment-list', comments: @book.book_comments ) %>")；

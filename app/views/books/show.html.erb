@@ -31,10 +31,12 @@
               <% end %>
             </div>
           </td>
-          <td><p>コメント件数:<%= @comments.count %></p></td>
+          <td><p>コメント件数:<%= @book.book_comments.count %></p></td>
         </tr>
       </table>
-      <%= render 'book_comments/comment-list', comments: @comments %>
+      <div id="Comment-List">
+        <%= render 'book_comments/comment-list', comments: @comments %>
+      </div>
       <%= render 'book_comments/comment-form', book: @book, ncomment: @ncomment %>
     </div>
   </div>

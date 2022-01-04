@@ -1,17 +1,12 @@
 class BookCommentsController < ApplicationController
 
-  before_action :set_book
-
-  def  set_book
-    @book = Book.find(params[:book_id])
-  end
-
 
   def create
+    @book = Book.find(params[:book_id])
     @ncomment = current_user.book_comments.new(book_comment_params)
     @ncomment.book_id = @book.id
     if @ncomment.save
-      redirect_to book_path(@book)
+      render 'book_comments/crate.js.erb'
     else
       @nbook = Book.new
       @book = Book.find(params[:book_id])
@@ -21,10 +16,11 @@ class BookCommentsController < ApplicationController
   end
 
   def destroy
-    comment = BookComment.find(params[:id])
-    if comment.user_id = current_user.id
-      comment.destroy
-      redirect_to request.referer
+    @book = Book.find(params[:book_id])
+    @comment = BookComment.find(params[:id])
+    if @comment.user_id = current_user.id
+      @comment.destroy
+      render 'book_comments/destroy.js.erb'
     else
       redirect_to root_path
     end

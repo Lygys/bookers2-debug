@@ -1,8 +1,10 @@
 <div>
-  <%= form_with(model:[book, ncomment], local: true) do |f| %>
-    <%= render 'layouts/errors', obj: ncomment %>
+  <%= form_with(model:[book, ncomment], remote: true) do |f| %>
+    <div id="comments-error">
+      <%= render 'layouts/errors', obj: ncomment %>
+    </div>
     <div class="form-group">
-      <%= f.text_area :comment, rows:'5', class: 'form-control　inputComment' %>
+      <%= f.text_area :comment, rows:'5', class: "form-control　InputComment" %>
     </div>
     <div class="form-group">
       <%= f.submit "送信", class: 'btn btn-success' %>
