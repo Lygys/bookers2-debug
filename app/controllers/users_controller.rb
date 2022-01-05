@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @books = Book.where(user_id: @user)
+    @books = Book.where(user_id: @user).sort_by_favorites
     @relationship = current_user.relationships.find_by(follow_id: @user.id)
     @new_relationship = current_user.relationships.new
   end

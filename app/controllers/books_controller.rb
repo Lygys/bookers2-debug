@@ -14,7 +14,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all.order(book_favorites_count: :desc)
+    @books = Book.all.sort_by_favorites
   end
 
   def create
@@ -23,7 +23,7 @@ class BooksController < ApplicationController
     if @nbook.save
       redirect_to book_path(@nbook), notice: "You have created book successfully."
     else
-      @books = Book.all
+      @books = Book.all.sort_by_favorites
       render 'index'
     end
   end
