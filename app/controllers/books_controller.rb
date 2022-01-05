@@ -8,14 +8,13 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @comments = BookComment.where(book_id: @book.id)
     @ncomment = BookComment.new
     @relationship = current_user.relationships.find_by(follow_id: @book.user.id)
     @new_relationship = current_user.relationships.new
   end
 
   def index
-    @books = Book.all
+    @books = Book.all.order(book_favorites_count: :desc)
   end
 
   def create

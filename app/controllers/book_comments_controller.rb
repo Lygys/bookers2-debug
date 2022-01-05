@@ -6,7 +6,8 @@ class BookCommentsController < ApplicationController
     @ncomment = current_user.book_comments.new(book_comment_params)
     @ncomment.book_id = @book.id
     if @ncomment.save
-      render 'book_comments/crate.js.erb'
+      flash.now[:notice] = 'You have posted the comment.'
+      render :index
     else
       @nbook = Book.new
       @book = Book.find(params[:book_id])
@@ -17,10 +18,11 @@ class BookCommentsController < ApplicationController
 
   def destroy
     @book = Book.find(params[:book_id])
-    @comment = BookComment.find(params[:id])
+    @comment = BookComment.find_by(id: params[:id], book_id: params[:book_id])
     if @comment.user_id = current_user.id
       @comment.destroy
-      render 'book_comments/destroy.js.erb'
+      @book = Book.find(params[:book_id])
+      render :index, alert: 'You have deleted the comment.'
     else
       redirect_to root_path
     end

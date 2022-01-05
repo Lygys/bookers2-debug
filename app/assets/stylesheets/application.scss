@@ -24,8 +24,12 @@
   line-height: normal;
 }
 
-#notice {
+.notice {
   color: green;
+}
+
+.alert {
+  color: red;
 }
 
 #error_explanation {
