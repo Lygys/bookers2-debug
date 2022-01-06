@@ -32,7 +32,7 @@
             </div>
           </td>
           <td class= "book-<%= @book.id %>-comments-count">コメント件数:<%= @book.book_comments.count %></td>
-          <td>PV数:<%=  @book.impressions_count %></td>
+          <td><i class="far fa-eye"></i><%= @book.impressionist_count %></td>
         </tr>
       </table>
       <table class= "Comment-List">

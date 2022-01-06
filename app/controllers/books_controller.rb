@@ -12,7 +12,7 @@ class BooksController < ApplicationController
     @ncomment = BookComment.new
     @relationship = current_user.relationships.find_by(follow_id: @book.user.id)
     @new_relationship = current_user.relationships.new
-    impressionist(@book, nil, unique: [:ip_address])
+    impressionist(@book, nil, unique: [:impressionable_id, :ip_address])
   end
 
   def index
