@@ -28,4 +28,11 @@
       <%= render 'relationships/follow_form', user: user %>
     </div>
   <% end %>
+
+  <% if (current_user != user)&&(current_user.following?(user))&&(user.following?(current_user))  %>
+    <div class= "btn btn-success btn-block">
+      <%= link_to 'Begin Chat', chat_path(user.id) %>
+    </div>
+  <% end %>
+
 </div>
