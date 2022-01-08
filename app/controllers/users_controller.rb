@@ -1,10 +1,5 @@
 class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update]
-	before_action :set_nbook
-
-  def set_nbook
-    @nbook = Book.new
-  end
 
 
   def ensure_correct_user

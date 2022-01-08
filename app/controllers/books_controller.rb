@@ -1,10 +1,5 @@
 class BooksController < ApplicationController
   impressionist :actions=> [:show]
-  before_action :set_nbook
-
-  def set_nbook
-    @nbook = Book.new
-  end
 
 
   def show

@@ -16,6 +16,9 @@ class User < ApplicationRecord
   has_many :user_rooms, dependent: :destroy
   has_many :chats, dependent: :destroy
 
+  has_many :group_users   #ここ！
+  has_many :groups, through: :group_users
+
   attachment :profile_image, destroy: false
 
   validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
