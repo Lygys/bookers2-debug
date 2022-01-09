@@ -7,6 +7,13 @@
       <%= render 'books/form', book: @nbook %>
     </div>
     <div class='col-md-8 offset-md-1'>
+      <%= form_with books_path, method: :get do |f| %>
+        <% if @sorted.present? %>
+          <%= f.select :sort, @sort_list, selected: @sorted, onChange: "javascript: this.form.submit();" %>
+        <% else %>
+          <%= f.select :sort, @sort_list, {}, onChange: "javascript: this.form.submit();" %>
+        <% end %>
+      <% end %>
       <h2>Books</h2>
       <%= render 'books/index', books: @books %>
     </div>
