@@ -39,8 +39,16 @@ class SearchsController < ApplicationController
         Book.where('title LIKE ?', '%'+content)
     end
     elsif @model == "Tag"
-        Book.includes(:tags).where(tags.name: content)
-    end
+      if method == 'perfect'
+        tags = Tag.where(name: content)
+      elsif method == 'forward'
+        tags = Tag.where('name LIKE ?', content + '%')
+      elsif method == 'backward'
+        tags = Tag.where('name LIKE ?', '%' + content)
+      else
+        tags = Tag.where('name LIKE ?', '%' + content + '%')
+      end
+      return tags.inject(init = []) {|result, tag| result + tag.books}
     else
       redirect_to request.referer
     end
