@@ -64,7 +64,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :evaluation)
+    params.require(:book).permit(:title, :body, :evaluation, tag_ids: [])
   end
 
   def sort_params

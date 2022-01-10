@@ -8,4 +8,10 @@
     <h3>Books search for "<%= @content %>"</h3>
     <%= render 'books/index', books: @results %>
   </div>
+<% elsif @model == "Tag" %>  
+  <div>
+    <h3>Books search for Tag:"<%= @content %>"</h3>
+    <%= render 'books/index', books: @results %>
+  </div>
+
 <% end %>

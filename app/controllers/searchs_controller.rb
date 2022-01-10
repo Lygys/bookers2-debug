@@ -27,7 +27,7 @@ class SearchsController < ApplicationController
         User.where('name LIKE ?', content+'%')
       elsif @method == "backward"
         User.where('name LIKE ?', '%'+content)
-      end
+    end
     elsif @model == "Book"
       if @method == "perfect"
         Book.where(title: content)
@@ -37,7 +37,10 @@ class SearchsController < ApplicationController
         Book.where('title LIKE ?', content+'%')
       elsif @method == "backward"
         Book.where('title LIKE ?', '%'+content)
-      end
+    end
+    elsif @model == "Tag"
+        Book.includes(:tags).where(tags.name: content)
+    end
     else
       redirect_to request.referer
     end

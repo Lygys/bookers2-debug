@@ -28,6 +28,11 @@
         <td><p>コメント件数:<%= book.book_comments.count %></p></td>
         <td><i class="far fa-eye"></i><%=  book.impressionist_count %></td>
         <td class="book-evaluation" data-score="<%= book.evaluation %>"></td>
+        <td>
+          <% book.tags.each do |tag| %>
+            <%= tag.name %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
