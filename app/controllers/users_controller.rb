@@ -14,6 +14,8 @@ class UsersController < ApplicationController
     @books = Book.where(user_id: @user).sort_by_favorites
     @relationship = current_user.relationships.find_by(follow_id: @user.id)
     @new_relationship = current_user.relationships.new
+    @today_book = @books.created_today
+    @yesterday_book = @books.created_yesterday
   end
 
   def index
